@@ -1,6 +1,10 @@
 PVector position, target;
 boolean isRunnimars = false;
-PImage worm1, worm2, worm3, worm4, worm5, amarsry1, amarsry2, pepper, mars;
+PImage worm1, worm2, worm3, worm4, worm5, pepper, mars;
+int numFoods = 10;
+int numWormies = 1;
+Wormie[] wormies = new Wormie[numWormies];
+Food[] foods = new Food[numFoods];
 void setup() { 
   size(800, 600, P2D);
   mars = loadImage("mars.jpg");
@@ -9,19 +13,22 @@ void setup() {
   target = new PVector(random(width), random(height));  
   
   ellipseMode(CENTER);
+  for (int i=0; i<wormies.length; i++) {
+    wormies[i] = new Wormie(random(width), random(height));
+  }
+    for (int i=0; i<foods.length; i++) {
+    foods[i] = new Food(random(width), random(height));
+    }
 }
 
 void draw() {
   background(mars);
-  PVector mousePos = new PVector(mouseX, mouseY);
-  isRunnimars = position.dist(mousePos) < 100;
   cursor(pepper);
-  if (isRunnimars) {
-    position = position.lerp(target, 0.08);
-    if (position.dist(target) < 5) {
-      target = new PVector(random(width), random(height));
-    }
+   for (int i=0; i<foods.length; i++) {
+    foods[i].run();
+  }
+ for (int i=0; i<wormies.length; i++) {
+    wormies[i].run();
+  }
   }
   
-  ellipse(position.x, position.y, 20, 20);
-}
