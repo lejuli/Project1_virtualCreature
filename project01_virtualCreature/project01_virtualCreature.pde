@@ -1,8 +1,9 @@
 PVector position, target;
-boolean isRunning = false;
-
+boolean isRunnimars = false;
+PImage worm1, worm2, worm3, worm4, worm5, amarsry1, amarsry2, pepper, mars;
 void setup() { 
   size(800, 600, P2D);
+  mars = loadImage("mars.jpg");
   
   position = new PVector(width/2, height/2);
   target = new PVector(random(width), random(height));  
@@ -11,12 +12,11 @@ void setup() {
 }
 
 void draw() {
-  background(127);
-  
+  background(mars);
   PVector mousePos = new PVector(mouseX, mouseY);
-  isRunning = position.dist(mousePos) < 100;
+  isRunnimars = position.dist(mousePos) < 100;
   
-  if (isRunning) {
+  if (isRunnimars) {
     position = position.lerp(target, 0.08);
     if (position.dist(target) < 5) {
       target = new PVector(random(width), random(height));
